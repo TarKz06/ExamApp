@@ -1,10 +1,42 @@
-﻿@page
-@model IndexModel
+@page
+@model ExamManager.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "รายการข้อสอบ";
 }
+<div class="container mt-4">
+    <h2 class="text-center">รายการข้อสอบ</h2>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="mb-3 text-start">
+        <a class="btn btn-success" asp-page="/AddExam">เพิ่มข้อสอบ</a>
+    </div>
+
+    @foreach (var exam in Model.ExamList)
+    {
+        <div class="mb-4 border rounded p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong>ข้อที่ @exam.Number: @exam.Question</strong>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@exam.Id"
+                      onsubmit="return confirm('ยืนยันการลบข้อสอบข้อนี้?');">
+                    <button type="submit" class="btn btn-danger btn-sm">ลบ</button>
+                </form>
+            </div>
+
+            @if (exam.Choices != null && exam.Choices.Any())
+            {
+                <div>
+                    @foreach (var choice in exam.Choices)
+                    {
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="radio" name="exam_@exam.Id" disabled />
+                            <label class="form-check-label">@choice.ChoiceText</label>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-danger">ไม่มีตัวเลือก</p>
+            }
+        </div>
+    }
 </div>

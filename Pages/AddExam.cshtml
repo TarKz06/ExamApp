@@ -1,0 +1,27 @@
+@page
+@model ExamManager.Pages.AddExamModel
+@{
+    ViewData["Title"] = "เพิ่มข้อสอบ";
+}
+<div class="container mt-4">
+    <h2>เพิ่มข้อสอบ</h2>
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Question" class="form-label">คำถาม</label>
+            <input asp-for="Question" class="form-control" required />
+        </div>
+
+        <label class="form-label mb-2">คำถามย่อย</label>
+        @for (int i = 0; i < 4; i++)
+        {
+            <div class="mb-2">
+                <label>คำถามที่ @(i + 1)</label>
+                <input type="text" class="form-control" name="Choices[@i]" required />
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary">บันทึก</button>
+        <a asp-page="/Index" class="btn btn-danger">ยกเลิก</a>
+    </form>
+</div>

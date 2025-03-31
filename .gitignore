@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# SQLite database files (optional)
+*.db
+*.db-shm
+*.db-wal
+
+# Migrations auto-generated
+**/*.Designer.cs
+
+# VSCode
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
